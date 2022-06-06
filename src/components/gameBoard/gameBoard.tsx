@@ -2,7 +2,19 @@ import React, { useEffect, useState } from "react";
 import gameBoard from '../assets/whereswaldo3.jpg';
 import { Main } from './gameBoardStyle'
 import Tagger from "../tagger/tagger";
-function GameBoard(){
+import {getfirestoreCoord} from '../backend/backend'
+
+interface propsgame{
+    getCaughtchar(isCaught: boolean): void;
+}
+interface fetchCoordinateInterface {
+    x1: number;
+    x2: number;
+    y1: number;
+    y2: number;
+  }
+
+const GameBoard=({getCaughtchar}:propsgame)=>{
 
     const [coord,setcoord] = useState({x:0,y:0});
     const [char,setchar] = useState({
@@ -18,13 +30,9 @@ function GameBoard(){
         console.log(coord);
 
         },[coord])
+    
 
-        // interface fetchCoordinateInterface {
-        //     x1: number;
-        //     x2: number;
-        //     y1: Number;
-        //     y2: Number;
-        //   }
+
 
     // const getcoord =(charName: string)=>{
 
@@ -51,13 +59,20 @@ function GameBoard(){
     //         return waldo.x1,waldo.x2,waldo.y1,waldo.y2;
     //     }
     // }
+
+    useEffect(()=>{
+        if(Object.values(char).every((char)=>char)){
+            getCaughtchar(true);
+        }
+    },[char]);
+
     const handleClick=async(e: React.MouseEvent<HTMLLIElement>)=>{
 
 
         const {x,y} = coord;
         const charName = e.currentTarget.innerHTML.toLowerCase( );
         console.log(charName);
-        // const fetchcoords:fetchCoordinateInterface | any =  getcoord(charName);
+        // const fetchcoords:fetchCoordinateInterface | any =  await getfirestoreCoord(charName);
 
         // let {x1,x2,y1,y2} = fetchcoords;
         // console.log(x1,x2,y1,y2)
