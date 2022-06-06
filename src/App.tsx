@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Head from './components/header/header';
 import Start from './components/startPage/startPage'
 import GameBoard from './components/gameBoard/gameBoard';
+import GetName from './components/getName/getName';
 
 const GlobalStyle = createGlobalStyle`
  body,h1,h2,h3,p {
@@ -18,6 +19,7 @@ function App() {
   const [timer,setTimer] = useState<boolean>(false);
   const [sec,setSec] = useState<number>(0);
   const [min,setMin] = useState<number>(0);
+  const [caught,setCaught] = useState<boolean>(false);
 
   useEffect(()=>{
     if(!timer){
@@ -34,21 +36,32 @@ function App() {
 
   useEffect(()=>{
     if(sec === 60){
-      setMin((prevMin)=>prevMin+1);
+      setMin((prevMin) => prevMin+1);
       setSec(0);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[min]);
+  },[min,sec]);
   const startTimer =()=>{
     setTimer(true);
   }
 
+  useEffect(()=>{
+    if(caught){
+      setTimer(false);
+      
+    }
+  },[caught])
+
+  const getCaughtchar = (isCaught:boolean): void =>{
+    setCaught(isCaught);
+  };
   return (
     <div className="App" style={{ position: 'relative' }}>
       <GlobalStyle />
-      <Head/>
+      <Head sec={sec} min={min}/>
       <Start startTimer = {startTimer}/>
-      <GameBoard />
+      <GameBoard getCaughtchar={getCaughtchar}/>
+      <GetName sec={sec} min={min}/>
     </div>
   );
 }
