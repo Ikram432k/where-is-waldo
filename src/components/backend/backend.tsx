@@ -1,8 +1,39 @@
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore,addDoc, collection, getDocs } from 'firebase/firestore';
 
+export const addPlayers = async(
+  name: string,
+  min: number,
+  sec: number,
+  totalTime: number
+)=>{
+  try{
+    await addDoc(collection(getFirestore(),`players`),{
+      name: name,
+      min: min,
+      sec: sec,
+      totalTime: totalTime,
+    });
+    console.log(name,min,sec,totalTime);
+  } catch(error){
+    console.error('Error writing new message to Firebase Database', error);
+  }
+};
 
+export const getPlayer = async()=>{
+  let data:any[] = [];
+  try{
+    const fetchPlayer = await getDocs(collection(getFirestore(),'players'));
+    fetchPlayer.docs.forEach((doc)=>{
+      data.push({...doc.data()});
+    });
+  } catch(error){
+    console.log(error);
+  }
+  return data;
+}
 
 export const getfirestoreCoord = async(name:string)=>{
     let data;
@@ -11,8 +42,8 @@ export const getfirestoreCoord = async(name:string)=>{
         fetchData.docs.forEach((doc) => {
           data = Object.assign({ ...doc.data() });
         });
-    } catch(error){
         console.log(data);
+    } catch(error){
         console.log(error);
     }
     return data;
