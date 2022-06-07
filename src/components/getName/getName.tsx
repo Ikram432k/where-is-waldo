@@ -20,7 +20,7 @@ const GetName =({askName,sec,min}:getnameprops)=>{
         e.preventDefault();
         const totalTime = min * 60 + sec;
         if(name){
-            // addPlayers(name,min,sec,totalTime);
+            addPlayers(name,min,sec,totalTime);
             setHide(true);
             console.log(totalTime);
         }
