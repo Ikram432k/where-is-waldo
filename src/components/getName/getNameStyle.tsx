@@ -30,16 +30,19 @@ export const Form = styled.form<hide>`
     align-items: center;
     gap:10px;
     letter-spacing: 1.5px;
+    border-radius:7px;
+
     h3{
     text-transform: uppercase;
-
     }
+
     input {
         margin-top: 1rem;
         font-size: 1.2rem;
         outline: none;
         border: none;
-      }
+    }
+
     button{
         cursor: pointer;
         text-transform: uppercase;
@@ -52,6 +55,8 @@ export const Form = styled.form<hide>`
         letter-spacing: 1.5px;
         transition: 0.5s;
         border:0.5px solid black;
+        border-radius:3px;
+
         &:hover{
             background-color:white;
             color:black;
