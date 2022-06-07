@@ -22,6 +22,9 @@ export const Div = styled.div`
         height:auto;
         gap:10px;
         padding:20px 40px;
+        border-radius:10px;
+        font-size:25px;
+
     }
     button{
         cursor: pointer;
@@ -35,9 +38,18 @@ export const Div = styled.div`
         letter-spacing: 1.5px;
         transition: 0.5s;
         border:0.5px solid black;
+        border-radius:5px;
+
         &:hover{
             background-color:green;
             color:white;
         }
+    }
+    @media only screen and (max-width:768px){
+        div{
+            padding:10px 20px;
+            font-size:20px;
+        }
+    
     }
     `;
