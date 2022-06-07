@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { addPlayers } from '../backend/backend';
+import React, { useEffect, useState } from "react";
+import { addPlayers, getPlayer } from '../backend/backend';
 import { Div,Form } from './getNameStyle';
-import ScoreBoard from '../scoreBoard/scoreBoard';
+import { Score } from './scoreBoardStyle'
 
 interface getnameprops{
     sec:number;
@@ -13,6 +13,21 @@ const GetName =({askName,sec,min}:getnameprops)=>{
     const [name,setName] = useState<string>('');
     const [hide,setHide] = useState<boolean>(false)
 
+    const [scores,setScores] = useState<any>([])
+
+useEffect(()=>{
+    getScoreList();
+
+},[]);
+
+
+const getScoreList = async() =>{
+    const data = await getPlayer();
+    data.sort((a,b)=> a.totalTime - b.totalTime);
+    setScores([...data])
+
+}
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void =>{
         setName(e.target.value);
     }
@@ -22,8 +37,8 @@ const GetName =({askName,sec,min}:getnameprops)=>{
         if(name){
             addPlayers(name,min,sec,totalTime);
             setHide(true);
-            console.log(totalTime);
         }
+        getScoreList();
     }
     return(
         <Div visible={askName}>
@@ -38,8 +53,26 @@ const GetName =({askName,sec,min}:getnameprops)=>{
             />
             <button>Enter</button>
         </Form>
-        <ScoreBoard hide={hide}/>
-        </Div>
+        <Score hide={hide}>
+            <h1>ScoreBoard</h1>
+                <ul>
+                 <li className='tableHead'>
+                    <span>position</span>
+                    <span>name</span>
+                    <span>duration</span>
+                </li>
+                {scores.map((obj:any,i:number)=>{
+                return(
+                <li key={i} className='tableBody'>
+                    <span>{`${i+1}`}</span>
+                    <span>{obj.name}</span>
+                    <span>{String(obj.min).padStart(2,'0')}:{String(obj.sec).padStart(2,'0')}</span>
+                </li>
+                )
+                })}
+                </ul>
+        </Score>
+    </Div>
     )
 }
 export default GetName;
