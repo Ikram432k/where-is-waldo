@@ -12,7 +12,6 @@ const [scores,setScores] = useState<any>([])
 
 useEffect(()=>{
     getScoreList();
-    console.log(scores);
 
 },[]);
 
@@ -20,11 +19,29 @@ const getScoreList = async() =>{
     const data = await getPlayer();
     data.sort((a,b)=> a.totalTime - b.totalTime);
     setScores([...data])
+    console.log(scores);
+
 }
 
 return(
 <Div hide={hide}>
-    <h1>scoreBoard</h1>
+    <h1>ScoreBoard</h1>
+    <ul>
+        <li className='tableHead'>
+            <span>position</span>
+            <span>name</span>
+            <span>duration</span>
+        </li>
+    {scores.map((obj:any,i:number)=>{
+        return(
+            <li key={i} className='tableBody'>
+                <span>{`${i+1}`}</span>
+                <span>{obj.name}</span>
+                <span>{String(obj.min).padStart(2,'0')}:{String(obj.sec).padStart(2,'0')}</span>
+            </li>
+        )
+    })}
+    </ul>
 </Div>
 )
 }
