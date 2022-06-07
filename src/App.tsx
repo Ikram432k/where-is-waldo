@@ -20,7 +20,7 @@ function App() {
   const [sec,setSec] = useState<number>(0);
   const [min,setMin] = useState<number>(0);
   const [caught,setCaught] = useState<boolean>(false);
-
+  const [askName,setAskName] = useState<boolean>(false);
   useEffect(()=>{
     if(!timer){
       return;
@@ -48,7 +48,7 @@ function App() {
   useEffect(()=>{
     if(caught){
       setTimer(false);
-      
+      setAskName(true)
     }
   },[caught])
 
@@ -61,7 +61,7 @@ function App() {
       <Head sec={sec} min={min}/>
       <Start startTimer = {startTimer}/>
       <GameBoard getCaughtchar={getCaughtchar}/>
-      <GetName sec={sec} min={min}/>
+      <GetName askName={askName} sec={sec} min={min}/>
     </div>
   );
 }
