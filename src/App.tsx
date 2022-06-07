@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
 }
 body{
-  background-color: white;
+  background-color: rgb(195, 195, 195);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 `;
