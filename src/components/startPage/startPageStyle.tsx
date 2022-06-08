@@ -13,7 +13,37 @@ export const Div = styled.div`
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 10;
-    div{
+
+    img{
+        // margin: 5px;
+        // max-width: 150px;
+        max-height: 150px;
+        margin-bottom: 5px;
+    }
+    .imgs{
+        display:flex;
+
+    }
+    .card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid black; 
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+
+    }
+    @media only screen and (max-width:768px){
+        div{
+            padding:10px 20px;
+            font-size:20px;
+        }
+    
+    }
+    `;
+    export const Maindiv = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,11 +52,10 @@ export const Div = styled.div`
         height:auto;
         gap:10px;
         padding:20px 40px;
-        border-radius:10px;
+        border-radius:5px;
         font-size:25px;
-
-    }
-    button{
+        `;
+    export const Button = styled.button`
         cursor: pointer;
         text-transform: uppercase;
         border:0;
@@ -38,18 +67,10 @@ export const Div = styled.div`
         letter-spacing: 1.5px;
         transition: 0.5s;
         border:0.5px solid black;
-        border-radius:5px;
+        border-radius:3px;
 
         &:hover{
-            background-color:green;
-            color:white;
+            background-color:white;
+            color:black;
         }
-    }
-    @media only screen and (max-width:768px){
-        div{
-            padding:10px 20px;
-            font-size:20px;
-        }
-    
-    }
     `;
