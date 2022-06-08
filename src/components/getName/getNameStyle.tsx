@@ -42,13 +42,18 @@ export const Form = styled.form<hide>`
         outline: none;
         border: none;
     }
+    .btns{
+        display:flex;
+        justify-content: space-between;
 
+    }
     button{
         cursor: pointer;
         text-transform: uppercase;
         border:0;
         color:white;
         margin-top:5px;
+        margin-left:5px;
         background-color:black;
         padding:8px 10px;
         font-size:12px;
