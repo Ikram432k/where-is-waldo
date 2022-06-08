@@ -27,43 +27,13 @@ const GameBoard=({getCaughtchar}:propsgame)=>{
         setchar({...char, ...obj});
     };
     useEffect(()=>{
-        console.log(coord);
-
         },[coord])
-    
-
-
-
-    // const getcoord =(charName: string)=>{
-
-    //     const waldo = {
-    //         char:"waldo",
-    //         x1:1075,
-    //         x2:1110,
-    //         y1:580,
-    //         y2:630
-    //     }
-    //     const wizard = {
-    //         x1:1075,
-    //         x2:1110,
-    //         y1:580,
-    //         y2:630
-    //     }
-    //     const outlaw = {
-    //         x1:1075,
-    //         x2:1110,
-    //         y1:580,
-    //         y2:630
-    //     }
-    //     if(charName === waldo.char){
-    //         return waldo.x1,waldo.x2,waldo.y1,waldo.y2;
-    //     }
-    // }
 
     useEffect(()=>{
         if(Object.values(char).every((char)=>char)){
             getCaughtchar(true);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[char]);
 
     const handleClick=async(e: React.MouseEvent<HTMLLIElement>)=>{
@@ -71,23 +41,23 @@ const GameBoard=({getCaughtchar}:propsgame)=>{
 
         const {x,y} = coord;
         const charName = e.currentTarget.innerHTML.toLowerCase( );
-        console.log(charName);
-        // const fetchcoords:fetchCoordinateInterface | any =  await getfirestoreCoord(charName);
+        // console.log(charName);
+        const fetchcoords:fetchCoordinateInterface | any =  await getfirestoreCoord(charName);
 
-        // let {x1,x2,y1,y2} = fetchcoords;
+        let {x1,x2,y1,y2} = fetchcoords;
         // console.log(x1,x2,y1,y2)
-        if(x > 1075 && y > 580){
-            if( x <= 1110 && y <= 630){
-                console.log('thats waldo')
+        if(x > x1 && y > y1){
+            if( x <= x2 && y <= y2){
+                alert(`you found ${charName}`)
                 updateChar({[charName]:'true'});
             }
             else
             {
-            console.log('too close but thats not waldo');
+                alert(`too close but thats not ${charName}`);
             }
         }
         else{
-            console.log(`thats not waldo ` )
+            alert(`thats not ${charName} ` )
         }
         setcoord({ x: 0, y: 0 });
 
