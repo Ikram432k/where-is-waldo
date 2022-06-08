@@ -38,9 +38,21 @@ export const Div = styled.div`
     @media only screen and (max-width:768px){
         div{
             padding:10px 20px;
-            font-size:20px;
+            font-size:15px;
         }
-    
+        img{
+            height:15rem;
+            padding:1rem;
+        }
+        .card{
+            padding:5px;
+            margin-bottom: 10px;
+
+        }
+        .imgs{
+            display:flex;
+            flex-direction: column;
+        }
     }
     `;
     export const Maindiv = styled.div`
