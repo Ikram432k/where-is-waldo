@@ -16,7 +16,6 @@ export const addPlayers = async(
       sec: sec,
       totalTime: totalTime,
     });
-    console.log(name,min,sec,totalTime);
   } catch(error){
     console.error('Error writing new message to Firebase Database', error);
   }
@@ -42,7 +41,7 @@ export const getfirestoreCoord = async(name:string)=>{
         fetchData.docs.forEach((doc) => {
           data = Object.assign({ ...doc.data() });
         });
-        console.log(data);
+        // console.log(data);
     } catch(error){
         console.log(error);
     }
