@@ -55,13 +55,16 @@ function App() {
   const getCaughtchar = (isCaught:boolean): void =>{
     setCaught(isCaught);
   };
+  const restart=()=>{
+    window.location.reload();
+  }
   return (
     <div className="App" style={{ position: 'relative' }}>
       <GlobalStyle />
-      <Head sec={sec} min={min}/>
+      <Head sec={sec} min={min} restart={restart}/>
       <Start startTimer = {startTimer}/>
       <GameBoard getCaughtchar={getCaughtchar}/>
-      <GetName askName={askName} sec={sec} min={min}/>
+      <GetName askName={askName} sec={sec} min={min} restart={restart}/>
     </div>
   );
 }
