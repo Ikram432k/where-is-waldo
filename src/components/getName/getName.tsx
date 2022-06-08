@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { addPlayers, getPlayer } from '../backend/backend';
 import { Div,Form } from './getNameStyle';
 import { Score } from './scoreBoardStyle'
+import { Button } from "../startPage/startPageStyle";
+
 
 interface getnameprops{
     sec:number;
     min:number;
     askName:boolean;
+    restart:any;
 }
-const GetName =({askName,sec,min}:getnameprops)=>{
+const GetName =({askName,sec,min,restart}:getnameprops)=>{
 
     const [name,setName] = useState<string>('');
     const [hide,setHide] = useState<boolean>(false)
@@ -51,7 +54,10 @@ const getScoreList = async() =>{
             type="text"
             placeholder="Enter your name"
             />
-            <button>Enter</button>
+            <div className="btns">
+                <button>Enter</button>
+                <Button onClick={restart}>restart</Button>
+            </div>
         </Form>
         <Score hide={hide}>
             <h1>ScoreBoard</h1>
@@ -71,6 +77,7 @@ const getScoreList = async() =>{
                 )
                 })}
                 </ul>
+                <Button onClick={restart}>restart</Button>
         </Score>
     </Div>
     )
